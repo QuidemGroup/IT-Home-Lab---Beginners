@@ -1,0 +1,76 @@
+-----------------------
+Hyper-V Server Commands
+-----------------------
+-- Management Tools --
+Install-WindowsFeature -Name Hyper-V -IncludeManagementTools -Restart
+
+-- Check if Hyper-V Installed --
+Get-WindowsFeature -name Hyper-V
+
+-- Install if Not --
+Install-WindowsFeature -Name Hyper-V-Tools,Hyper-V-PowerShell
+
+-- Enable Remote Desktop --
+cscript C:\Windows\System32\Scregedit.wsf /ar 0
+
+-- Add on Hyper-V Host --
+192.168.60.51	Win11-01
+
+-- Enable PS Remoting and CredSSP --
+Enable-PSRemoting
+Enable-WSManCredSSP -Role server
+
+-- Enable Remote Management --
+Configure-SMremoting.exe -enable
+
+-- Set Interface as Private --
+Get-NetConnectionProfile -InterfaceAlias Ethernet
+Set-NetConnectionProfile -InterfaceAlias Ethernet -NetworkCategory Private
+
+-- Firewall Rules --
+Enable-NetFirewallRule -DisplayGroup "Remote Event Log Management"
+Enable-NetFirewallRule -DisplayGroup "Windows Remote Management"
+Enable-NetFirewallRule -DisplayGroup "Remote Service Management"
+Enable-NetFirewallRule -DisplayGroup "File and Printer Sharing"
+Enable-NetFirewallRule -DisplayGroup "Remote Volume Management"
+Enable-NetFirewallRule -DisplayGroup "Windows Defender Firewall Remote Management"
+Set-NetFirewallRule -DisplayGroup "Hyper-V" -Enabled True
+Get-NetFirewallRule -DisplayGroup "Hyper-V" | Enable-NetFirewallRule
+XXX Enable-NetFirewallRule -DisplayGroup "Windows Firewall Remote Management"
+XXX Enable-NetFirewallRule -DisplayGroup "Performance Logs and Alerts, File and Printer Sharing"
+Enable-NetFirewallRule -DisplayGroup "Remote Event*"
+Enable-NetFirewallRule -DisplayGroup "Remote Scheduled*"
+Enable-NetFirewallRule -DisplayGroup "Remote Service*"
+
+-- Firewall Rules ICMP --
+New-NetFirewallRule -DisplayName "Allow ICMPv4-In" -Protocol ICMPv4 -IcmpType 8 -Direction Inbound -Action Allow -RemoteAddress "192.168.60.51"
+
+-- Enable WS-Man to ALlow uncencrypted traffic (for workgroup) --
+Set-Item WSMan:\localhost\Service\AllowUnencrypted -Value $true
+Set-Item WSMan:\localhost\Service\Auth\Basic -Value $true
+
+-- Add Trusted Host --
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "Win11-01" -Force
+
+
+-----------------------
+MGMT Host Commands
+-----------------------
+-- Enable WinRM --
+Start-Service -Name winrm
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "H2019-01" -Force
+Enable-WSManCredSSP -Role client -DelegateComputer "H2019-01"
+Stop-Service -Name winrm
+
+-- Add on Hyper-V Host --
+192.168.60.52	H2019-01
+
+-- Test Authentication --
+Invoke-Command {whoami} -ComputerName H2019-01 -Credential H2019-01\Administrator
+
+-- Hyper-V Credential Store in Memory --
+cmdkey /add:H2019-01 /user:Administrator /pass:
+
+-- Or Launch Hyper-V using runas --
+runas /user:H2019-01\Administrator /netonly "mmc virtmgmt.msc"
+
