@@ -1,0 +1,27 @@
+-----------------------
+Debian 13 Commands
+-----------------------
+
+-- Check for Virtualization Support --
+$ lscpu | grep -i virtualization
+
+-- Check for kernal KVM Support --
+$ zgrep CONFIG_KVM /boot/config-$(uname -r)
+
+-- Install QEMU KVM with virt-manager --
+$ sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+
+-- Enable and Start libvirtd daemon --
+Enable service                  $ sudo systemctl enable libvirtd.service
+Start service                   $ sudo systemctl start libvirtd.service
+Check service                   $ sudo systemctl status libvirtd.service
+
+-- Install tuned (optional) --
+Install Command                 $ sudo apt install tuned
+Start Service                   $ sudo apt start tuned
+
+-- Check for profiles --
+Check active profile            $ tuned-adm active
+List profiles                   $ tuned-adm list
+Enable virtual-host profile     $ sudo tuned-adm profile virtual-host
+Check active profile            $ tuned-adm active
