@@ -1,7 +1,6 @@
 -----------------------
 Debian 13 Commands
 -----------------------
-
 -- Check for Virtualization Support --
 $ lscpu | grep -i virtualization
 
