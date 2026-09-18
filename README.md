@@ -2,7 +2,7 @@
 These vidoes provide a guide on how to set up an IT Home Lab using a basic firewall (pfSense), a Hypervisor (Hyper-V/KVM/Proxmox), Web Server (Apache/Nginx/Windows IIS), and a jumpbox (Windows/Linux).<br/>
 
 ## IT Home Lab - Introduction
-The introduction provides an overview of what the IT Home Lab series aims to cover.
+The introduction provides an overview of what the IT Home Lab series aims to cover.<br/>
 Youtube Link: https://youtu.be/v6goOO5Eq7o<br/>
 Github Repo: https://github.com/QuidemGroup/IT-Home-Lab---Beginners/tree/main
 
@@ -23,15 +23,15 @@ Github Repo: https://github.com/QuidemGroup/IT-Home-Lab---Beginners/tree/main
 
 ## IT Home Lab - Part 03B
 Part 3B provides a detailed guide on setting up and running Hyper-V on a Windows Host.<br/>
-Youtube Link:<br/>
+Youtube Link: https://youtu.be/ETXbQphYb8U<br/>
 Github Repo: https://github.com/QuidemGroup/IT-Home-Lab---Beginners/tree/main
 
 ## IT Home Lab - Part 04
 Part 4 provides a detailed guide on setting up and running QEMU on both Windows and Linux.<br/>
-Youtube Link:<br/>
+Youtube Link: https://youtu.be/c-0_ZE4G3Ls<br/>
 Github Repo: https://github.com/QuidemGroup/IT-Home-Lab---Beginners/tree/main
 
 ## IT Home Lab - Part 05
 Part 5 provides a detailed guide on setting up Proxmox, configuring a public domain, and establishing basic networking.<br/>
-Youtube Link:<br/>
+Youtube Link: https://youtu.be/JHgPqjXeJi4<br/>
 Github Repo: https://github.com/QuidemGroup/IT-Home-Lab---Beginners/tree/main
