@@ -1,2 +1,3 @@
 # IT Home Lab - Beginners
-Part of the Youtube Series.
+This series of videos aims at providing the basic information on how to set up your own IT Home Lab using a basic Firewall, Web Server, Hypervisor and a JumpBox. 
+
